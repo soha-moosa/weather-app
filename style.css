@@ -1,0 +1,17 @@
+.navbar-width {
+
+    background-color: #7D1EBA;
+    box-shadow : 0px 0px 10px gray;
+}
+body{
+    font-family: 'Comfortaa', cursive;
+    color: #7D1EBA !important;
+    
+}
+.copy {
+    position: absolute;
+    right: 500px;
+    bottom: 0px;
+    color: #7D1EBA;
+    font-family: 'Leckerli One', cursive;
+}
