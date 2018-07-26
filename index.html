@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <title>Weather App</title>
+</head>
+
+<body>
+
+
+
+
+
+    <header class="navbar-width py-4">
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-12 col-md-6 col-lg-6 text-center text-light">
+                    <h4>
+                        <i class="fa fa-cloud" aria-hidden="true"></i> Weather Application </h4>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <form action="" class="form-inline  my-2 my-lg-0 ">
+                        <input type="search" class="form-control ml-xl-auto mr-sm-2 btn btn-outline-light text-dark" placeholder="Find Your City"
+                            id="city">
+                        <button type="button" onclick="getWeather()" class="btn btn-outline-light my-2 my-sm-0 color">Search</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="container data-body">
+        <table class="table text-center" id="appTable"></table>
+    </div>
+
+
+    <h3 class="copy">Designed by: Soha Moosa &copy;</h3>
+    <br>
+    <br>
+    <br>
+</body>
+
+<script>
+
+    const getWeather = () => {
+        var cityName = document.getElementById('city').value.toLowerCase();
+        console.log(cityName);
+        if (cityName !== "") {
+            fetch(` https://api.apixu.com/v1/current.json?key=f3202b9d9ea34f868f3120440180206&q=${cityName}`)
+                .then(response => response.json())
+                .then(data => weatherOutput(data))
+                .catch(error => alert('Some error occured! please try again.'));
+        } else {
+            alert('Please Enter a City Name.');
+        }
+    }
+
+    const weatherOutput = weatherData => {
+
+        let table = document.getElementById("appTable");
+
+        table.innerHTML = '';
+        table.innerHTML =
+
+            `
+    <br>
+    <br>
+    <br>    
+    <tr>
+    <th>City Name: </th>
+    <td>${weatherData.location.name}</td>
+    </tr>
+  
+    <tr>
+    <th>Region: </th>
+    <td>${weatherData.location.region}</td>
+    </tr>
+  
+    <tr>
+    <th>Country: </th>
+    <td>${weatherData.location.country}</td>
+    </tr>
+  
+    <tr> 
+    <th>Temperature: </th>
+    <td>${weatherData.current.temp_c}&#176;C</td>
+    </tr>
+    
+    <tr>
+    <th>Humidity: </th>
+    <td>${weatherData.current.humidity}%</td>
+    </tr>
+    
+    <tr>
+    <th>Latitude: </th>
+    <td>${weatherData.location.lat}</td>
+    </tr>
+    
+    <tr>
+    <th>Longitude: </th>
+    <td>${weatherData.location.lon}</td>
+    </tr>
+    `
+    }
+</script> 
+
+
+<script src="./jquery.min.js"></script>
+<script src="./popper.min.js"></script>
+<script src="./bootstrap.min.js"></script>
+
+</html>
